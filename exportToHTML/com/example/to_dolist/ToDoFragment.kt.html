@@ -1,0 +1,79 @@
+<html>
+<head>
+<title>ToDoFragment.kt</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #cc7832;}
+.s1 { color: #a9b7c6;}
+.s2 { color: #808080;}
+.s3 { color: #6a8759;}
+</style>
+</head>
+<body bgcolor="#2b2b2b">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+ToDoFragment.kt</font>
+</center></td></tr></table>
+<pre><span class="s0">package </span><span class="s1">com.example.to_dolist</span>
+
+<span class="s1">import android.content.Intent</span>
+<span class="s1">import android.os.Bundle</span>
+<span class="s1">import android.view.LayoutInflater</span>
+<span class="s1">import android.view.View</span>
+<span class="s1">import android.view.ViewGroup</span>
+<span class="s1">import android.widget.Button</span>
+<span class="s1">import androidx.appcompat.app.AppCompatActivity</span>
+<span class="s1">import androidx.fragment.app.Fragment</span>
+<span class="s1">import androidx.lifecycle.Observer</span>
+<span class="s1">import androidx.lifecycle.ViewModelProvider</span>
+<span class="s1">import timber.log.Timber</span>
+<span class="s1">import javax.inject.Inject</span>
+
+<span class="s1">open </span><span class="s0">class </span><span class="s1">ToDoFragment : Fragment()</span><span class="s0">, </span><span class="s1">View.OnClickListener {</span>
+
+    <span class="s1">@Inject</span>
+    <span class="s1">lateinit </span><span class="s0">var </span><span class="s1">viewModelFactory: ViewModelProvider.Factory</span>
+
+    <span class="s2">// private val stateObserver = Observer&lt;ToDoState&gt; { bindState(it) }</span>
+
+    <span class="s0">val </span><span class="s1">viewModel: ToDoViewModel</span>
+        <span class="s1">get() = ViewModelProvider(</span><span class="s0">this, </span><span class="s1">viewModelFactory).get(ToDoViewModel::</span><span class="s0">class</span><span class="s1">.java)</span>
+
+    <span class="s1">override </span><span class="s0">fun </span><span class="s1">onCreate(savedInstanceState: Bundle?) {</span>
+        <span class="s0">super</span><span class="s1">.onCreate(savedInstanceState)</span>
+        <span class="s1">setHasOptionsMenu(</span><span class="s0">true</span><span class="s1">)</span>
+    <span class="s1">}</span>
+
+    <span class="s1">override </span><span class="s0">fun </span><span class="s1">onCreateView(</span>
+        <span class="s1">inflater: LayoutInflater</span><span class="s0">, </span><span class="s1">container: ViewGroup?</span><span class="s0">, </span><span class="s1">savedInstanceState: Bundle?</span>
+    <span class="s1">): View? {</span>
+        <span class="s0">val </span><span class="s1">view = inflater!!.inflate(R.layout.activity_main</span><span class="s0">, </span><span class="s1">container</span><span class="s0">, false</span><span class="s1">)</span>
+        <span class="s0">val </span><span class="s1">btn: Button = view.findViewById&lt;Button&gt;(R.id.add_another_button)</span>
+        <span class="s1">btn.setOnClickListener(</span><span class="s0">this</span><span class="s1">)</span>
+        <span class="s0">return </span><span class="s1">view</span>
+    <span class="s1">}</span>
+
+    <span class="s1">override </span><span class="s0">fun </span><span class="s1">onViewCreated(view: View</span><span class="s0">, </span><span class="s1">savedInstanceState: Bundle?) {</span>
+        <span class="s0">super</span><span class="s1">.onViewCreated(view</span><span class="s0">, </span><span class="s1">savedInstanceState)</span>
+        <span class="s1">Timber.d(</span><span class="s3">&quot;Message: Fragment&quot;</span><span class="s1">)</span>
+    <span class="s1">}</span>
+
+    <span class="s1">override </span><span class="s0">fun </span><span class="s1">onClick(view: View?) {</span>
+        <span class="s0">when </span><span class="s1">(view?.id) {</span>
+            <span class="s1">R.id.add_another_button -&gt; {</span>
+                <span class="s0">val </span><span class="s1">intent = Intent(getActivity()</span><span class="s0">, </span><span class="s1">AddAnotherItem::</span><span class="s0">class</span><span class="s1">.java)</span>
+                <span class="s1">getActivity()?.startActivity(intent)</span>
+                <span class="s1">Timber.d(</span><span class="s3">&quot;Message: Button clicked&quot;</span><span class="s1">)</span>
+            <span class="s1">}</span>
+        <span class="s1">}</span>
+    <span class="s1">}</span>
+
+    <span class="s1">companion </span><span class="s0">object </span><span class="s1">{</span>
+        <span class="s0">fun </span><span class="s1">newInstance() = ToDoFragment()</span>
+    <span class="s1">}</span>
+<span class="s1">}</span>
+
+</pre>
+</body>
+</html>
