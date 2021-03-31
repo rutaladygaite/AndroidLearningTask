@@ -13,12 +13,10 @@ import javax.inject.Inject
 @Suppress("LateinitUsage", "TooGenericExceptionCaught")
 open class ToDoApplication : Application(), HasAndroidInjector {
 
-    lateinit var appComponent: AppComponent
-
     @Inject
     lateinit var dispatchingAndroidInjector: DispatchingAndroidInjector<Any>
 
-    fun activityInjector(): DispatchingAndroidInjector<Any> = this.dispatchingAndroidInjector
+    lateinit var appComponent: AppComponent
 
     override fun onCreate() {
         super.onCreate()
@@ -28,7 +26,8 @@ open class ToDoApplication : Application(), HasAndroidInjector {
 
     }
 
-    open fun initializeComponent(): AppComponent = DaggerAppComponent.builder().appModule(AppModule(this)).build()
-
     override fun androidInjector(): AndroidInjector<Any> = dispatchingAndroidInjector
+
+    @Suppress("DEPRECATION")
+    open fun initializeComponent(): AppComponent = DaggerAppComponent.builder().appModule(AppModule(this)).build()
 }

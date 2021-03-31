@@ -6,7 +6,6 @@ import dagger.Provides
 
 @Module(
     includes = [
-        ActivityModule::class,
         ViewModelModule::class,
     ]
 )

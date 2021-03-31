@@ -20,7 +20,7 @@ class AddAnotherFragment : Fragment(), View.OnClickListener {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View? {
-        val view = inflater!!.inflate(R.layout.activity_add_another_item, container, false)
+        val view = inflater.inflate(R.layout.activity_add_another_item, container, false)
         val btn: Button = view.findViewById(R.id.save_button)
 
         btn.setOnClickListener(this)
