@@ -1,6 +1,5 @@
 package com.example.to_dolist
 
-import android.content.ClipData
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.ViewModel
@@ -14,11 +13,6 @@ abstract class ToDoViewModel(
 
     init {
         _state.value = generateInitState()
-    }
-
-    fun updateToDoItem(state: ToDoState) {
-        _state.value = state
-        updateState { copy(title = state.title) }
     }
 
     private fun generateInitState(): ToDoState = ToDoState()

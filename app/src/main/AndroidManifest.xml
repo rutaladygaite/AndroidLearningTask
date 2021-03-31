@@ -12,7 +12,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ToDoList"
         tools:ignore="Instantiatable">
-        <activity android:name=".AddAnotherItem">
+        <activity android:name=".AddAnotherActivity">
 
         </activity>
         <activity android:name=".MainActivity">
