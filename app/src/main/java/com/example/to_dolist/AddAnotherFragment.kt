@@ -8,9 +8,10 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
 import androidx.fragment.app.Fragment
+import dagger.android.support.DaggerFragment
 import timber.log.Timber
 
-class AddAnotherFragment : Fragment(), View.OnClickListener {
+class AddAnotherFragment : DaggerFragment(), View.OnClickListener {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

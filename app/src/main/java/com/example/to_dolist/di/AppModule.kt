@@ -1,16 +1,19 @@
 package com.example.to_dolist.di
 
-import android.app.Application
+import android.content.Context
+import com.example.to_dolist.ToDoApplication
+import dagger.Binds
 import dagger.Module
-import dagger.Provides
+import dagger.android.AndroidInjectionModule
 
 @Module(
     includes = [
-        ViewModelModule::class,
-    ]
+        AndroidInjectionModule::class,
+        ActivityBindingModule::class,
+]
 )
-
-class AppModule(private val app: Application){
-    @Provides
-    fun providesApplication(): Application = app
+abstract class AppModule {
+    @Binds
+    @AppContext
+    abstract fun application(app: MyApp): Context
 }

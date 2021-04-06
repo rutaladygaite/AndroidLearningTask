@@ -1,16 +1,19 @@
 package com.example.to_dolist.di
 
+import android.os.Bundle
+import androidx.lifecycle.AbstractSavedStateViewModelFactory
+import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
-import javax.inject.Inject
-import javax.inject.Provider
+import androidx.savedstate.SavedStateRegistryOwner
 
-class ViewModelFactory@Inject constructor(
-    private val creators: Map<Class<out ViewModel>, @JvmSuppressWildcards Provider<ViewModel>>) : ViewModelProvider.Factory {
+class ViewModelFactory<out V : ViewModel>(
+    private val viewModelFactory: ViewModelAssistedFactory<V>,
+    owner: SavedStateRegistryOwner,
+    defaultArgs: Bundle? = null
+) : AbstractSavedStateViewModelFactory(owner, defaultArgs) {
 
-    @Suppress("UNCHECKED_CAST", "UnsafeCast")
-    override fun <T : ViewModel> create(modelClass: Class<T>): T {
-        val creator: ViewModel = creators.getValue(modelClass).get()
-        return creator as T
+    @Suppress("UNCHECKED_CAST")
+    override fun <T : ViewModel> create(key: String, modelClass: Class<T>, handle: SavedStateHandle): T {
+        return viewModelFactory.create(handle) as T
     }
 }

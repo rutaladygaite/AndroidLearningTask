@@ -5,10 +5,11 @@ import androidx.appcompat.app.AppCompatActivity
 import dagger.android.AndroidInjector
 import dagger.android.DispatchingAndroidInjector
 import dagger.android.HasAndroidInjector
+import dagger.android.support.DaggerAppCompatActivity
 import timber.log.Timber
 import javax.inject.Inject
 
-class AddAnotherActivity : AppCompatActivity(), HasAndroidInjector {
+class AddAnotherActivity : DaggerAppCompatActivity(), HasAndroidInjector {
 
     @Inject
     lateinit var dispatchingAndroidInjector: DispatchingAndroidInjector<Any>
