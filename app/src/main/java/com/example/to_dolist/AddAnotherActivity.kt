@@ -19,7 +19,7 @@ class AddAnotherActivity : DaggerAppCompatActivity(), HasAndroidInjector {
         setContentView(R.layout.activity_add_another_item)
 
         if (savedInstanceState == null) {
-            getSupportFragmentManager().beginTransaction()
+            supportFragmentManager.beginTransaction()
                 .add(R.id.add_another_layout, AddAnotherFragment.newInstance()).commit()
             Timber.d("Message: main activity")
         }

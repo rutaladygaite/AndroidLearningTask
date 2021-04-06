@@ -1,17 +1,21 @@
 package com.example.to_dolist.di
 
 import com.example.to_dolist.ToDoApplication
-import dagger.BindsInstance
+import com.example.to_dolist.di.modules.ActivityModule
+import com.example.to_dolist.di.modules.AppModule
+
 import dagger.Component
-import dagger.android.AndroidInjector
+import dagger.android.support.AndroidSupportInjectionModule
 import javax.inject.Singleton
 
-@Component(modules = [AppModule::class])
 @Singleton
-interface AppComponent : AndroidInjector<MyApp> {
-
-    @Component.Factory
-    interface Factory : AndroidInjector.Factory<MyApp> {
-        override fun create(@BindsInstance instance: MyApp): AppComponent
-    }
+@Component(
+    modules = [
+        AndroidSupportInjectionModule::class,
+        AppModule::class,
+        ActivityModule::class,
+    ]
+)
+interface AppComponent {
+    fun inject(target: ToDoApplication)
 }

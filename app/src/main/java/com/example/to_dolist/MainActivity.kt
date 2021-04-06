@@ -2,12 +2,13 @@ package com.example.to_dolist
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import com.example.to_dolist.di.Injectable
 import dagger.android.AndroidInjector
 import dagger.android.DispatchingAndroidInjector
 import dagger.android.HasAndroidInjector
 import javax.inject.Inject
 
-class MainActivity : AppCompatActivity(), HasAndroidInjector {
+class MainActivity : AppCompatActivity(), HasAndroidInjector, Injectable {
 
     @Inject
     lateinit var dispatchingAndroidInjector: DispatchingAndroidInjector<Any>
@@ -16,7 +17,7 @@ class MainActivity : AppCompatActivity(), HasAndroidInjector {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         if (savedInstanceState == null) {
-            getSupportFragmentManager().beginTransaction()
+            supportFragmentManager.beginTransaction()
                 .add(R.id.root_layout, ToDoFragment.newInstance()).commit()
         }
     }
