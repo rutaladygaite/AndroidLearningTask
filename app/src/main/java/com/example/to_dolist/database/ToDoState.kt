@@ -1,4 +1,4 @@
-package com.example.to_dolist
+package com.example.to_dolist.database
 
 data class ToDoState(
     val title: String? = "",

@@ -8,10 +8,19 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
 import androidx.fragment.app.Fragment
-import dagger.android.support.DaggerFragment
+import androidx.lifecycle.ViewModelProvider
+import com.example.to_dolist.di.Injectable
+import com.example.to_dolist.di.modules.ViewModelFactory
 import timber.log.Timber
+import javax.inject.Inject
 
-class AddAnotherFragment : DaggerFragment(), View.OnClickListener {
+class AddAnotherFragment : Fragment(), View.OnClickListener, Injectable {
+
+    @Inject
+    lateinit var viewModelFactory: ViewModelFactory
+
+    private val toDoViewModel: ToDoViewModel
+        get() = ViewModelProvider(this, viewModelFactory).get(ToDoViewModel::class.java)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -23,7 +32,6 @@ class AddAnotherFragment : DaggerFragment(), View.OnClickListener {
     ): View? {
         val view = inflater.inflate(R.layout.activity_add_another_item, container, false)
         val btn: Button = view.findViewById(R.id.save_button)
-
         btn.setOnClickListener(this)
         return view
     }
@@ -45,10 +53,11 @@ class AddAnotherFragment : DaggerFragment(), View.OnClickListener {
         }
     }
 
-    fun textInput(){
+    fun textInput() {
         var get_to_do_text = view?.findViewById<TextView>(R.id.new_to_do_text)
         var to_do_text = get_to_do_text?.text.toString().trim()
         Timber.d("Message: $to_do_text")
+        toDoViewModel.test(to_do_text)
     }
 
     companion object {

@@ -3,6 +3,7 @@ package com.example.to_dolist
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.ViewModel
+import com.example.to_dolist.database.ToDoState
 import timber.log.Timber
 import javax.inject.Inject
 
@@ -21,8 +22,8 @@ class ToDoViewModel @Inject constructor(private val repository: Repository) : Vi
         _state.value = update(getState())
     }
 
-    fun test() {
-        Timber.d("Works!")
+    fun test(text: String) {
+        Timber.d("Message: Works!")
     }
 
     private fun getState(): ToDoState = _state.value ?: generateInitState()

@@ -1,7 +1,7 @@
 package com.example.to_dolist
 
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
+import com.example.to_dolist.di.Injectable
 import dagger.android.AndroidInjector
 import dagger.android.DispatchingAndroidInjector
 import dagger.android.HasAndroidInjector
@@ -9,7 +9,7 @@ import dagger.android.support.DaggerAppCompatActivity
 import timber.log.Timber
 import javax.inject.Inject
 
-class AddAnotherActivity : DaggerAppCompatActivity(), HasAndroidInjector {
+class AddAnotherActivity : DaggerAppCompatActivity(), HasAndroidInjector, Injectable {
 
     @Inject
     lateinit var dispatchingAndroidInjector: DispatchingAndroidInjector<Any>

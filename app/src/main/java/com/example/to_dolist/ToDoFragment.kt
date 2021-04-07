@@ -40,7 +40,6 @@ class ToDoFragment : Fragment(), View.OnClickListener, Injectable {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         Timber.d("Message: Fragment")
-        toDoViewModel.test()
     }
 
     override fun onClick(view: View?) {
