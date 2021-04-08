@@ -39,7 +39,8 @@ class AddAnotherFragment : Fragment(), View.OnClickListener, Injectable {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        Timber.d("Message: Fragment")
+        var todoItem = toDoViewModel.getToDoItem()
+        Timber.d("Message: AddAnotherFragment: $todoItem")
     }
 
     override fun onClick(view: View?) {
@@ -48,7 +49,6 @@ class AddAnotherFragment : Fragment(), View.OnClickListener, Injectable {
                 textInput()
                 val intent = Intent(getActivity(), MainActivity::class.java)
                 getActivity()?.startActivity(intent)
-                Timber.d("Message: Save clicked")
             }
         }
     }
@@ -56,9 +56,8 @@ class AddAnotherFragment : Fragment(), View.OnClickListener, Injectable {
     fun textInput() {
         var get_to_do_text = view?.findViewById<TextView>(R.id.new_to_do_text)
         var to_do_text = get_to_do_text?.text.toString().trim()
-        Timber.d("Message: $to_do_text")
+        Timber.d("Message input: $to_do_text")
         toDoViewModel.test(to_do_text)
-        toDoViewModel.getToDoInput(to_do_text)
     }
 
     companion object {

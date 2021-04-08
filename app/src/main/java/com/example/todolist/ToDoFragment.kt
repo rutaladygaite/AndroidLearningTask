@@ -10,7 +10,6 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.example.todolist.di.Injectable
 import com.example.todolist.di.modules.ViewModelFactory
-import timber.log.Timber
 import javax.inject.Inject
 
 class ToDoFragment : Fragment(), View.OnClickListener, Injectable {
@@ -39,7 +38,7 @@ class ToDoFragment : Fragment(), View.OnClickListener, Injectable {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        Timber.d("Message: Fragment")
+        toDoViewModel.getToDoItem()
     }
 
     override fun onClick(view: View?) {
@@ -47,7 +46,6 @@ class ToDoFragment : Fragment(), View.OnClickListener, Injectable {
             R.id.add_another_button -> {
                 val intent = Intent(requireActivity(), AddAnotherActivity::class.java)
                 requireActivity().startActivity(intent)
-                Timber.d("Message: Button clicked")
             }
         }
     }

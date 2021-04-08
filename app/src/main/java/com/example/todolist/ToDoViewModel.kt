@@ -23,12 +23,12 @@ class ToDoViewModel @Inject constructor(private val repository: Repository) : Vi
     }
 
     fun test(text: String) {
-        Timber.d("Message: Works!")
+        Timber.d("Message: Works! $text")
     }
 
-    fun getToDoInput(message: String){
-        repository.insertToDo(message)
-        Timber.d("Message: in VM: $message")
+    fun getToDoItem() {
+        var getToDoItem = repository.getToDo()
+        Timber.d("Message VM: $getToDoItem")
     }
 
     private fun getState(): ToDoState = _state.value ?: generateInitState()

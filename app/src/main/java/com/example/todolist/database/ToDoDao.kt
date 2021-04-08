@@ -9,8 +9,8 @@ abstract class ToDoDao {
     abstract fun getAll(): List<ToDoItem>
 
     @Insert
-    abstract fun insert(vararg todo_item: ToDoItem)
+    abstract fun insert(title: List<ToDoItem>)
 
-    @Update
-    abstract fun updateTodo(vararg todo_item: ToDoItem)
+    @Query("UPDATE todo_item SET title = :title")
+    abstract fun updateToDo(vararg title: String)
 }

@@ -6,7 +6,6 @@ import dagger.android.AndroidInjector
 import dagger.android.DispatchingAndroidInjector
 import dagger.android.HasAndroidInjector
 import dagger.android.support.DaggerAppCompatActivity
-import timber.log.Timber
 import javax.inject.Inject
 
 class AddAnotherActivity : DaggerAppCompatActivity(), HasAndroidInjector, Injectable {
@@ -21,7 +20,6 @@ class AddAnotherActivity : DaggerAppCompatActivity(), HasAndroidInjector, Inject
         if (savedInstanceState == null) {
             supportFragmentManager.beginTransaction()
                 .add(R.id.add_another_layout, AddAnotherFragment.newInstance()).commit()
-            Timber.d("Message: main activity")
         }
     }
 
