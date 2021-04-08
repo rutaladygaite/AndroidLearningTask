@@ -19,6 +19,7 @@ class DatabaseModule {
         application: Application,
         coroutineScope: CoroutineScope,
     ): AppDatabase = Room.databaseBuilder(application, AppDatabase::class.java, "todo-list.db")
+        .allowMainThreadQueries()
         .setQueryExecutor { coroutineScope.launch { it.run() } }
         .build()
 
