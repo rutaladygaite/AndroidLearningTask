@@ -1,8 +1,8 @@
-package com.example.to_dolist.di.modules
+package com.example.todolist.di.modules
 
 import android.app.Activity
-import com.example.to_dolist.AddAnotherActivity
-import com.example.to_dolist.AddAnotherFragment
+import com.example.todolist.AddAnotherActivity
+import com.example.todolist.AddAnotherFragment
 import dagger.Binds
 import dagger.Module
 import dagger.android.ContributesAndroidInjector

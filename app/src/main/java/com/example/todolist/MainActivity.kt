@@ -1,8 +1,8 @@
-package com.example.to_dolist
+package com.example.todolist
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import com.example.to_dolist.di.Injectable
+import com.example.todolist.di.Injectable
 import dagger.android.AndroidInjector
 import dagger.android.DispatchingAndroidInjector
 import dagger.android.HasAndroidInjector

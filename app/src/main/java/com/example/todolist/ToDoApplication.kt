@@ -1,10 +1,10 @@
-package com.example.to_dolist
+package com.example.todolist
 
 import android.app.Application
-import com.example.to_dolist.di.AppComponent
-import com.example.to_dolist.di.AppInjector
-import com.example.to_dolist.di.DaggerAppComponent
-import com.example.to_dolist.di.modules.AppModule
+import com.example.todolist.di.AppComponent
+import com.example.todolist.di.AppInjector
+import com.example.todolist.di.DaggerAppComponent
+import com.example.todolist.di.modules.AppModule
 import dagger.android.AndroidInjector
 import dagger.android.DispatchingAndroidInjector
 import dagger.android.HasAndroidInjector

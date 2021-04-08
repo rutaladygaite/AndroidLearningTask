@@ -1,4 +1,4 @@
-package com.example.to_dolist.di.modules
+package com.example.todolist.di.modules
 
 import android.app.Application
 import dagger.Module
@@ -11,6 +11,7 @@ import dagger.Provides
     ]
 )
 class AppModule(private val app: Application) {
+
     @Provides
     fun providesApplication(): Application = app
 }

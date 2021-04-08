@@ -1,4 +1,4 @@
-package com.example.to_dolist.di
+package com.example.todolist.di
 
 import android.app.Activity
 import android.app.Application

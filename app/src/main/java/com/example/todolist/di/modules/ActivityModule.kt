@@ -1,7 +1,7 @@
-package com.example.to_dolist.di.modules
+package com.example.todolist.di.modules
 
-import com.example.to_dolist.AddAnotherActivity
-import com.example.to_dolist.MainActivity
+import com.example.todolist.AddAnotherActivity
+import com.example.todolist.MainActivity
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
 

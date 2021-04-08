@@ -1,4 +1,4 @@
-package com.example.to_dolist.di.scopes
+package com.example.todolist.di.scopes
 
 import androidx.lifecycle.ViewModel
 import dagger.MapKey
