@@ -10,6 +10,8 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.example.todolist.di.Injectable
 import com.example.todolist.di.modules.ViewModelFactory
+import kotlinx.android.synthetic.main.activity_main.*
+import timber.log.Timber
 import javax.inject.Inject
 
 class ToDoFragment : Fragment(), View.OnClickListener, Injectable {
@@ -38,7 +40,31 @@ class ToDoFragment : Fragment(), View.OnClickListener, Injectable {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        toDoViewModel.getToDoItem()
+        printMessage()
+    }
+
+    private fun printMessage() {
+        var toDoItem = toDoViewModel.getToDoItem()
+        val numberOfInputs = toDoItem.count()
+        if (toDoItem.isNotEmpty()) {
+            var fulltext: String? = null
+            for (n in 0..(numberOfInputs - 1)) {
+                var toDoID = toDoItem[n].id
+                var toDoTitle = toDoItem[n].title
+                //In order not to display null value of fulltext
+                if (fulltext == null) {
+                    fulltext = toDoID.toString() + ". " + toDoTitle
+                } else {
+                    fulltext = fulltext + "\n" + toDoID + ". " + toDoTitle
+                }
+                n + 1
+            }
+            Timber.d("Message full text: \n$fulltext")
+            text_displayed.text = fulltext
+        } else {
+            //Display when no objects exist yet
+            text_displayed.text = ""
+        }
     }
 
     override fun onClick(view: View?) {

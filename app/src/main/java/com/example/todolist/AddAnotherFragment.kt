@@ -11,7 +11,6 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.example.todolist.di.Injectable
 import com.example.todolist.di.modules.ViewModelFactory
-import timber.log.Timber
 import javax.inject.Inject
 
 class AddAnotherFragment : Fragment(), View.OnClickListener, Injectable {
@@ -36,13 +35,6 @@ class AddAnotherFragment : Fragment(), View.OnClickListener, Injectable {
         return view
     }
 
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        var todoItem = toDoViewModel.getToDoItem()
-        Timber.d("Message: AddAnotherFragment: $todoItem")
-    }
-
     override fun onClick(view: View?) {
         when (view?.id) {
             R.id.save_button -> {
@@ -56,8 +48,7 @@ class AddAnotherFragment : Fragment(), View.OnClickListener, Injectable {
     fun textInput() {
         var get_to_do_text = view?.findViewById<TextView>(R.id.new_to_do_text)
         var to_do_text = get_to_do_text?.text.toString().trim()
-        Timber.d("Message input: $to_do_text")
-        toDoViewModel.test(to_do_text)
+        toDoViewModel.insertNewItem(to_do_text)
     }
 
     companion object {

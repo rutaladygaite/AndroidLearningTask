@@ -10,7 +10,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#355C7D"
+        android:background="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -25,10 +25,10 @@
             android:layout_marginTop="50dp"
             android:layout_marginEnd="50dp"
             android:layout_marginRight="50dp"
-            android:background="#00FFFFFF"
             android:fontFamily="@font/patrick_hand_sc"
+            android:background="@color/white"
             android:text="@string/list_of_to_do"
-            android:textColor="#FFFFFF"
+            android:textColor="@color/black"
             android:textSize="24sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="1.0"
@@ -36,22 +36,25 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/text_dispalyed"
+            android:id="@+id/text_displayed"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="50dp"
-            android:layout_marginLeft="50dp"
             android:layout_marginTop="20dp"
             android:layout_marginEnd="50dp"
-            android:layout_marginRight="50dp"
-            android:background="#F8B195"
+            android:background="@drawable/rectangle"
+            android:ems="10"
             android:fontFamily="@font/patrick_hand_sc"
             android:gravity="start|top"
+            android:padding="5dp"
             android:text=""
+            android:textColor="@color/black"
+            android:textSize="18sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/to_do_full_text" />
+            app:layout_constraintTop_toBottomOf="@+id/to_do_full_text"
+            tools:ignore="TextViewEdits" />
 
         <Button
             android:id="@+id/add_another_button"

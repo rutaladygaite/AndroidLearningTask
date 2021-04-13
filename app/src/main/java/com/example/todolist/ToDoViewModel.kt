@@ -1,35 +1,23 @@
 package com.example.todolist
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.ViewModel
-import com.example.todolist.database.ToDoState
+import com.example.todolist.database.ToDoDao
+import com.example.todolist.database.ToDoItem
 import timber.log.Timber
 import javax.inject.Inject
 
-class ToDoViewModel @Inject constructor(private val repository: Repository) : ViewModel() {
+class ToDoViewModel @Inject constructor(
+    private val toDoDao: ToDoDao
+) : ViewModel() {
 
-    private val _state = MediatorLiveData<ToDoState>()
-    val state: LiveData<ToDoState> get() = _state
-
-    init {
-        _state.value = generateInitState()
+    fun getToDoItem(): List<ToDoItem> {
+        var getToDo = toDoDao.getAll()
+        Timber.d("Message VM: $getToDo")
+        return getToDo
     }
 
-    private fun generateInitState(): ToDoState = ToDoState()
-
-    private fun updateState(update: ToDoState.() -> ToDoState) {
-        _state.value = update(getState())
+    fun insertNewItem(message: String) {
+        val todoitem = ToDoItem(0, message)
+        toDoDao.insertNew(todoitem)
     }
-
-    fun test(text: String) {
-        Timber.d("Message: Works! $text")
-    }
-
-    fun getToDoItem() {
-        var getToDoItem = repository.getToDo()
-        Timber.d("Message VM: $getToDoItem")
-    }
-
-    private fun getState(): ToDoState = _state.value ?: generateInitState()
 }
