@@ -1,9 +1,9 @@
-package com.example.todolist.di.modules
+package com.example.todolist.core.di.modules
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.example.todolist.ToDoViewModel
-import com.example.todolist.di.scopes.ViewModelKey
+import com.example.todolist.core.ToDoViewModel
+import com.example.todolist.core.di.scopes.ViewModelKey
 
 import dagger.Binds
 import dagger.Module

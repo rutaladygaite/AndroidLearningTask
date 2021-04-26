@@ -12,8 +12,8 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ToDoList"
         tools:ignore="Instantiatable">
-        <activity android:name="com.example.todolist.AddAnotherActivity" />
-        <activity android:name="com.example.todolist.MainActivity">
+        <activity android:name="com.example.todolist.app.AddAnotherActivity" />
+        <activity android:name="com.example.todolist.app.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />

@@ -1,7 +1,7 @@
-package com.example.todolist.di.modules
+package com.example.todolist.core.di.modules
 
 import android.app.Application
-import com.example.todolist.database.UIContext
+import com.example.todolist.core.di.scopes.UIContext
 import dagger.Module
 import dagger.Provides
 import kotlinx.coroutines.CoroutineScope

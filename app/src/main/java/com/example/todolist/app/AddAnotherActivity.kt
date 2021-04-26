@@ -1,19 +1,20 @@
-package com.example.todolist
+package com.example.todolist.app
 
-import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
-import com.example.todolist.di.Injectable
-import com.example.todolist.di.modules.ViewModelFactory
+import com.example.todolist.R
+import com.example.todolist.core.ToDoViewModel
+import com.example.todolist.core.di.Injectable
+import com.example.todolist.core.di.modules.ViewModelFactory
 import dagger.android.AndroidInjector
 import dagger.android.DispatchingAndroidInjector
 import dagger.android.HasAndroidInjector
 import javax.inject.Inject
 
-class AddAnotherActivity: AppCompatActivity(), HasAndroidInjector, Injectable {
+class AddAnotherActivity : AppCompatActivity(), HasAndroidInjector, Injectable {
 
     @Inject
     lateinit var dispatchingAndroidInjector: DispatchingAndroidInjector<Any>
@@ -31,16 +32,14 @@ class AddAnotherActivity: AppCompatActivity(), HasAndroidInjector, Injectable {
         val button = findViewById<Button>(R.id.save_button)
         button.setOnClickListener {
             textInput()
-            val intent = Intent(this, MainActivity::class.java)
-            startActivity(intent)
+            super.finish()
         }
     }
 
-    fun textInput() {
-        // Fix this. :)
-        var get_to_do_text = findViewById<TextView>(R.id.new_to_do_text)
-        var to_do_text = get_to_do_text?.text.toString().trim()
-        toDoViewModel.insertNewItem(to_do_text)
+    private fun textInput() {
+        val getToDoText = findViewById<TextView>(R.id.new_to_do_text)
+        val getToDo = getToDoText?.text.toString().trim()
+        toDoViewModel.insertNewItem(getToDo)
     }
 
     override fun androidInjector(): AndroidInjector<Any> = dispatchingAndroidInjector

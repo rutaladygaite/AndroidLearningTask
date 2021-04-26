@@ -1,4 +1,4 @@
-package com.example.todolist
+package com.example.todolist.app
 
 import android.content.Intent
 import android.os.Bundle
@@ -7,16 +7,16 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.RecyclerView
-import com.example.todolist.database.ToDoState
-import com.example.todolist.di.Injectable
-import com.example.todolist.di.modules.ViewModelFactory
+import com.example.todolist.R
+import com.example.todolist.core.ToDoViewModel
+import com.example.todolist.core.database.ToDoState
+import com.example.todolist.core.di.Injectable
+import com.example.todolist.core.di.modules.ViewModelFactory
 import dagger.android.AndroidInjector
 import dagger.android.DispatchingAndroidInjector
 import dagger.android.HasAndroidInjector
 import kotlinx.android.synthetic.main.activity_main.*
-import timber.log.Timber
 import javax.inject.Inject
-
 
 class MainActivity : AppCompatActivity(), HasAndroidInjector, Injectable {
 
@@ -45,19 +45,17 @@ class MainActivity : AppCompatActivity(), HasAndroidInjector, Injectable {
         }
     }
 
-    private fun bindState(state: ToDoState?){
+    private fun bindState(state: ToDoState?) {
         state ?: return
 
-        // Make a few lists of items so when new ones are added it's repopulated and etc
-        if(!state.toDoItems.isNullOrEmpty()){
+        if (!state.toDoItems.isNullOrEmpty()) {
             val adapter = recycler_view.adapter as ToDoAdapter
             val stateList = state.toDoItems
             val newList = mutableListOf<String>()
             val newListId = mutableListOf<Int>()
-            for(listItems in stateList){
+            for (listItems in stateList) {
                 listItems.title?.let { newList.add(it) }
                 listItems.id.let { newListId.add(it) }
-
             }
             adapter.notifyDataChange(newList, newListId)
         }
@@ -72,7 +70,6 @@ class MainActivity : AppCompatActivity(), HasAndroidInjector, Injectable {
         toDoViewModel.state.removeObservers(this)
         super.onStop()
     }
-
 
     override fun androidInjector(): AndroidInjector<Any> = dispatchingAndroidInjector
 }

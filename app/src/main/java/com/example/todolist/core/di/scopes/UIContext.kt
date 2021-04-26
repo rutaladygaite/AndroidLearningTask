@@ -1,4 +1,4 @@
-package com.example.todolist.database
+package com.example.todolist.core.di.scopes
 
 import javax.inject.Qualifier
 

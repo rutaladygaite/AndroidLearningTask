@@ -1,8 +1,8 @@
-package com.example.todolist.di
+package com.example.todolist.core.di
 
 import com.example.todolist.ToDoApplication
-import com.example.todolist.di.modules.ActivityModule
-import com.example.todolist.di.modules.AppModule
+import com.example.todolist.core.di.modules.ActivityModule
+import com.example.todolist.core.di.modules.AppModule
 
 import dagger.Component
 import dagger.android.support.AndroidSupportInjectionModule

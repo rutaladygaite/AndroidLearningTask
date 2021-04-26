@@ -1,4 +1,4 @@
-package com.example.todolist.database
+package com.example.todolist.core.database
 
 import androidx.lifecycle.LiveData
 import androidx.room.*
@@ -21,6 +21,4 @@ abstract class ToDoDao {
     @Update
     abstract fun updateList(vararg todo_item: ToDoItem)
 
-//    @Query("UPDATE todo_item SET id = :id AND title = :title")
-//    abstract fun updateToDo(id: Long, title: String)
 }

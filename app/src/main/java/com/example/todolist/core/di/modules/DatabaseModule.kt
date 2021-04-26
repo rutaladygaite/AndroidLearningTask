@@ -1,9 +1,9 @@
-package com.example.todolist.di.modules
+package com.example.todolist.core.di.modules
 
 import android.app.Application
 import androidx.room.Room
-import com.example.todolist.database.AppDatabase
-import com.example.todolist.database.ToDoDao
+import com.example.todolist.core.database.AppDatabase
+import com.example.todolist.core.database.ToDoDao
 import dagger.Module
 import dagger.Provides
 import kotlinx.coroutines.CoroutineScope
@@ -18,11 +18,11 @@ class DatabaseModule {
     fun provideDatabase(
         application: Application,
         coroutineScope: CoroutineScope,
-    ): AppDatabase = Room.databaseBuilder(application, AppDatabase::class.java, "todo-list.db")
+    ) = Room.databaseBuilder(application, AppDatabase::class.java, "todo-list.db")
         .allowMainThreadQueries()
         .setQueryExecutor { coroutineScope.launch { it.run() } }
         .build()
 
     @Provides
-    fun provideServerDao(db: AppDatabase): ToDoDao = db.toDoDao()
+    fun provideServerDao(db: AppDatabase) = db.toDoDao()
 }
