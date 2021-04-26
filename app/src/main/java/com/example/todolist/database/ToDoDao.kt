@@ -1,5 +1,6 @@
 package com.example.todolist.database
 
+import androidx.lifecycle.LiveData
 import androidx.room.*
 
 @Dao
@@ -7,6 +8,9 @@ abstract class ToDoDao {
 
     @Query("SELECT * FROM todo_item ")
     abstract fun getAll(): List<ToDoItem>
+
+    @Query("SELECT * FROM todo_item")
+    abstract fun getAllLiveData(): LiveData<List<ToDoItem>>
 
     @Insert
     abstract fun insert(title: List<ToDoItem>)

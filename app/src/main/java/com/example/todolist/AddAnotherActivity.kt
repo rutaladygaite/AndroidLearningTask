@@ -37,6 +37,7 @@ class AddAnotherActivity: AppCompatActivity(), HasAndroidInjector, Injectable {
     }
 
     fun textInput() {
+        // Fix this. :)
         var get_to_do_text = findViewById<TextView>(R.id.new_to_do_text)
         var to_do_text = get_to_do_text?.text.toString().trim()
         toDoViewModel.insertNewItem(to_do_text)

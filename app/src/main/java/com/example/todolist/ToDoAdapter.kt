@@ -6,17 +6,9 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 
-class ToDoAdapter(val toDoList: ArrayList<String>) :
+class ToDoAdapter(private var toDoList: List<String>,
+                    private var toDoListid: List<Int>) :
     RecyclerView.Adapter<ToDoAdapter.ToDoViewHolder>() {
-
-    // Describes an item view and its place within the RecyclerView
-    class ToDoViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        private val toDoTextView: TextView = itemView.findViewById(R.id.to_do_text)
-
-        fun bind(text: String) {
-            toDoTextView.text = text
-        }
-    }
 
     // Returns a new ViewHolder
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ToDoViewHolder {
@@ -33,6 +25,26 @@ class ToDoAdapter(val toDoList: ArrayList<String>) :
 
     // Displays data at a certain position
     override fun onBindViewHolder(holder: ToDoViewHolder, position: Int) {
-        holder.bind(toDoList[position])
+        holder.bind(toDoList[position], toDoListid[position])
+    }
+
+    fun notifyDataChange(listOfData: List<String>, newListOfIds: List<Int>){
+        // Notify data of RV that we updated something
+        toDoList = listOfData
+        toDoListid = newListOfIds
+        notifyDataSetChanged()
+    }
+
+    // Describes an item view and its place within the RecyclerView
+    class ToDoViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        private val toDoTextView: TextView = itemView.findViewById(R.id.to_do_text)
+        private val toDoTextId: TextView = itemView.findViewById(R.id.todo_id_text)
+
+        fun bind(text: String, id: Int) {
+            // Bind new text ids
+            toDoTextView.text = text
+            // Can format the text of id's here if we want to add the dot after the number or something
+            toDoTextId.text = id.toString()
+        }
     }
 }

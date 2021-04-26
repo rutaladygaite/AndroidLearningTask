@@ -1,6 +1,6 @@
 package com.example.todolist.database
 
 data class ToDoState(
-    val title: String? = "",
+   val toDoItems: List<ToDoItem>? = null
     //val date: Int? = 0,
 )
