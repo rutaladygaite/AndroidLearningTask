@@ -12,9 +12,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ToDoList"
         tools:ignore="Instantiatable">
-        <activity android:name="com.example.todolist.AddAnotherActivity">
-
-        </activity>
+        <activity android:name="com.example.todolist.AddAnotherActivity" />
         <activity android:name="com.example.todolist.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -26,5 +24,4 @@
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
     </application>
-
 </manifest>
