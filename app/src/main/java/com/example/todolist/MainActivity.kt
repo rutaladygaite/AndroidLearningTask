@@ -4,18 +4,23 @@ import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.RecyclerView
+import com.example.todolist.database.ToDoState
 import com.example.todolist.di.Injectable
 import com.example.todolist.di.modules.ViewModelFactory
 import dagger.android.AndroidInjector
 import dagger.android.DispatchingAndroidInjector
 import dagger.android.HasAndroidInjector
+import kotlinx.android.synthetic.main.activity_main.*
 import timber.log.Timber
 import javax.inject.Inject
 
 
 class MainActivity : AppCompatActivity(), HasAndroidInjector, Injectable {
+
+    private val stateObserver = Observer<ToDoState> { bindState(it) }
 
     @Inject
     lateinit var dispatchingAndroidInjector: DispatchingAndroidInjector<Any>
@@ -30,9 +35,8 @@ class MainActivity : AppCompatActivity(), HasAndroidInjector, Injectable {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val toDoList = printMessage()
         val recyclerView: RecyclerView = findViewById(R.id.recycler_view)
-        recyclerView.adapter = ToDoAdapter(toDoList)
+        recyclerView.adapter = ToDoAdapter(listOf(), listOf())
 
         val button = findViewById<Button>(R.id.add_another_button)
         button.setOnClickListener {
@@ -41,22 +45,34 @@ class MainActivity : AppCompatActivity(), HasAndroidInjector, Injectable {
         }
     }
 
-    private fun printMessage(): ArrayList<String> {
-        var toDoItem = toDoViewModel.getToDoItem()
-        val numberOfInputs = toDoItem.count()
-        val list = ArrayList<String>()
-        if (toDoItem.isNotEmpty()) {
-            for (n in 0..(numberOfInputs - 1)) {
-                var toDoID = toDoItem[n].id
-                var toDoTitle = toDoItem[n].title
-                var fullText = "$toDoID. $toDoTitle"
-                list.add(fullText)
-                n + 1
+    private fun bindState(state: ToDoState?){
+        state ?: return
+
+        // Make a few lists of items so when new ones are added it's repopulated and etc
+        if(!state.toDoItems.isNullOrEmpty()){
+            val adapter = recycler_view.adapter as ToDoAdapter
+            val stateList = state.toDoItems
+            val newList = mutableListOf<String>()
+            val newListId = mutableListOf<Int>()
+            for(listItems in stateList){
+                listItems.title?.let { newList.add(it) }
+                listItems.id.let { newListId.add(it) }
+
             }
-            Timber.d("Message full text: $list")
+            adapter.notifyDataChange(newList, newListId)
         }
-        return list
     }
+
+    override fun onStart() {
+        super.onStart()
+        toDoViewModel.state.observe(this, stateObserver)
+    }
+
+    override fun onStop() {
+        toDoViewModel.state.removeObservers(this)
+        super.onStop()
+    }
+
 
     override fun androidInjector(): AndroidInjector<Any> = dispatchingAndroidInjector
 }
