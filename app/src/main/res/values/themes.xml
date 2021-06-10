@@ -5,6 +5,7 @@
         <item name="colorPrimary">@color/purple_200</item>
         <item name="colorPrimaryVariant">#C06C84</item>
         <item name="colorOnPrimary">@color/white</item>
+        <item name="android:colorBackground">@color/white</item>
         <!-- Secondary brand color. -->
         <item name="colorSecondary">@color/white</item>
         <item name="colorSecondaryVariant">@color/white</item>
@@ -12,4 +13,9 @@
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
     </style>
+
+    <style name="noTransition"  parent="Theme.MaterialComponents.DayNight.DarkActionBar">
+        <item name="android:windowAnimationStyle">@null</item>
+    </style>
+
 </resources>

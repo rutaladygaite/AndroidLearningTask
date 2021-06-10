@@ -4,4 +4,12 @@
     <string name="save_to_do">Save</string>
     <string name="add_text">Add what you have to do:</string>
     <string name="list_of_to_do">What you have to do:</string>
+
+    <!--Edit text-->
+    <string name="edit_text">Edit</string>
+    <string name="delete_text">Delete</string>
+    <string name="close_text">Close</string>
+    <string name="edit_text_title">Select what you want to do:</string>
+    <string name="apply_text">Apply</string>
+    <string name="cancel_text">Cancel</string>
 </resources>

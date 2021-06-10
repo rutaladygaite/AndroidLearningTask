@@ -13,6 +13,9 @@
         android:theme="@style/Theme.ToDoList"
         tools:ignore="Instantiatable">
         <activity android:name="com.example.todolist.app.AddAnotherActivity" />
+        <activity
+            android:name="com.example.todolist.app.ChangeItemActivity"
+            android:theme="@style/noTransition" />
         <activity android:name="com.example.todolist.app.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

@@ -12,6 +12,9 @@ abstract class ToDoDao {
     @Query("SELECT * FROM todo_item")
     abstract fun getAllLiveData(): LiveData<List<ToDoItem>>
 
+    @Delete
+    abstract fun deleteItem(vararg toDoItem: ToDoItem)
+
     @Insert
     abstract fun insert(title: List<ToDoItem>)
 
@@ -19,6 +22,6 @@ abstract class ToDoDao {
     abstract fun insertNew(vararg toDoItem: ToDoItem)
 
     @Update
-    abstract fun updateList(vararg todo_item: ToDoItem)
+    abstract fun updateList(vararg toDoItem: ToDoItem)
 
 }
