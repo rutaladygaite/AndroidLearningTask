@@ -1,5 +1,7 @@
 <resources>
-    <string name="app_name">To-Do List</string>
+
+    <!--To Do text-->
+    <string name="to_do_name">To-Do List</string>
     <string name="add_to_do">Add another To-Do</string>
     <string name="save_to_do">Save</string>
     <string name="add_text">Add what you have to do:</string>
@@ -12,4 +14,9 @@
     <string name="edit_text_title">Select what you want to do:</string>
     <string name="apply_text">Apply</string>
     <string name="cancel_text">Cancel</string>
+
+    <!--Other text-->
+    <string name="dad_jokes_name">Dad jokes</string>
+    <string name="chuck_norris_name">Chuck Norris facts</string>
+
 </resources>

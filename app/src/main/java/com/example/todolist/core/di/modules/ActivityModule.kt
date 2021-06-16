@@ -1,8 +1,6 @@
 package com.example.todolist.core.di.modules
 
-import com.example.todolist.app.AddAnotherActivity
-import com.example.todolist.app.ChangeItemActivity
-import com.example.todolist.app.MainActivity
+import com.example.todolist.app.*
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
 
@@ -10,11 +8,18 @@ import dagger.android.ContributesAndroidInjector
 abstract class ActivityModule {
 
     @ContributesAndroidInjector
-    abstract fun contributesMainActivity(): MainActivity
+    abstract fun contributesMainActivityTwo(): MainActivity
+
+    @ContributesAndroidInjector
+    abstract fun contributesMainActivity(): ToDoActivity
+
+    @ContributesAndroidInjector
+    abstract fun contributesJokesActivity(): JokesActivity
 
     @ContributesAndroidInjector
     abstract fun contributesAddAnotherActivity(): AddAnotherActivity
 
     @ContributesAndroidInjector
     abstract fun contributesChangeDialog(): ChangeItemActivity
+
 }

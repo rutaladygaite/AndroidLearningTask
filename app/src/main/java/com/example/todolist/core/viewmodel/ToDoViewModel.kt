@@ -1,4 +1,4 @@
-package com.example.todolist.core
+package com.example.todolist.core.viewmodel
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MediatorLiveData
@@ -6,7 +6,6 @@ import androidx.lifecycle.ViewModel
 import com.example.todolist.core.database.ToDoDao
 import com.example.todolist.core.database.ToDoItem
 import com.example.todolist.core.database.ToDoState
-import timber.log.Timber
 import javax.inject.Inject
 
 class ToDoViewModel @Inject constructor(
@@ -40,12 +39,12 @@ class ToDoViewModel @Inject constructor(
         toDoDao.insertNew(todoItem)
     }
 
-    fun deleteItem(id: Int, message: String){
+    fun deleteItem(id: Int, message: String) {
         val todoItem = ToDoItem(id, message)
         toDoDao.deleteItem(todoItem)
     }
 
-    fun updateItem(id: Int, message: String){
+    fun updateItem(id: Int, message: String) {
         val todoItem = ToDoItem(id, message)
         toDoDao.updateList(todoItem)
     }

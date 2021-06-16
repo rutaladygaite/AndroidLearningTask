@@ -10,7 +10,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
 import androidx.lifecycle.ViewModelProvider
 import com.example.todolist.R
-import com.example.todolist.core.ToDoViewModel
+import com.example.todolist.core.viewmodel.ToDoViewModel
 import com.example.todolist.core.di.Injectable
 import com.example.todolist.core.di.modules.ViewModelFactory
 import dagger.android.AndroidInjector

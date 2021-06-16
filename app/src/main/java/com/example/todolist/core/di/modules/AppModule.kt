@@ -1,6 +1,8 @@
 package com.example.todolist.core.di.modules
 
 import android.app.Application
+import androidx.annotation.VisibleForTesting
+import com.example.todolist.core.di.scopes.BgContext
 import com.example.todolist.core.di.scopes.UIContext
 import dagger.Module
 import dagger.Provides
@@ -24,5 +26,15 @@ class AppModule(private val app: Application) {
     fun provideUIDispatcher(): CoroutineContext = Dispatchers.Main
 
     @Provides
-    fun provideCoroutineScope(@UIContext uiContext: CoroutineContext): CoroutineScope = CoroutineScope(uiContext)
+    @BgContext
+    fun provideBgDispatcher(): CoroutineContext = ioCoroutineContext
+
+    @Provides
+    fun provideCoroutineScope(@UIContext uiContext: CoroutineContext): CoroutineScope =
+        CoroutineScope(uiContext)
+
+    companion object {
+        @VisibleForTesting
+        var ioCoroutineContext: CoroutineContext = Dispatchers.Default
+    }
 }
