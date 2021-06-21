@@ -15,8 +15,10 @@
     <string name="apply_text">Apply</string>
     <string name="cancel_text">Cancel</string>
 
-    <!--Other text-->
+    <!--API text-->
     <string name="dad_jokes_name">Dad jokes</string>
-    <string name="chuck_norris_name">Chuck Norris facts</string>
+    <string name="get_dad_joke">Get a dad joke</string>
+    <string name="chuck_fact_name">Chuck Norris facts</string>
+    <string name="get_chuck_fact">Get a Chuck Norris fact</string>
 
 </resources>

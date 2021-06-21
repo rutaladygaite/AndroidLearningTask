@@ -5,7 +5,6 @@ import android.os.Bundle
 import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
 import com.example.todolist.R
-import com.example.todolist.core.di.Injectable
 
 class MainActivity : AppCompatActivity() {
 
@@ -15,6 +14,7 @@ class MainActivity : AppCompatActivity() {
 
         val toDoButton = findViewById<Button>(R.id.to_do_button)
         val jokesButton = findViewById<Button>(R.id.dad_jokes_button)
+        val chuckButton = findViewById<Button>(R.id.chuck_norris__button)
 
         toDoButton.setOnClickListener {
             val intent = Intent(this, ToDoActivity::class.java)
@@ -22,8 +22,17 @@ class MainActivity : AppCompatActivity() {
         }
 
         jokesButton.setOnClickListener {
-            val intent = Intent(this, JokesActivity::class.java)
-            startActivity(intent)
+            startActivity(
+                Intent(this, ApiActivity::class.java)
+                    .putExtra(ApiActivity.DAD_JOKE, "dad_joke")
+            )
+        }
+
+        chuckButton.setOnClickListener {
+            startActivity(
+                Intent(this, ApiActivity::class.java)
+                    .putExtra(ApiActivity.CHUCK_FACT, "chuck_fact")
+            )
         }
     }
 }

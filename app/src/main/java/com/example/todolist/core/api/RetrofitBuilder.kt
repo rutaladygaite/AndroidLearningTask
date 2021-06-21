@@ -6,19 +6,33 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 object RetrofitBuilder {
 
-    private const val BASE_URL = "https://icanhazdadjoke.com"
-
+    private var retrofit: Retrofit? = null
     private var gson = GsonBuilder()
         .setLenient()
         .create()
 
-    private fun getRetrofit(): Retrofit {
-        return Retrofit.Builder()
-            .baseUrl(BASE_URL)
+    private const val DAD_JOKES_URL = "https://icanhazdadjoke.com"
+    private const val CHUCK_NORRIS_URL = "https://api.chucknorris.io"
+
+    private fun getDadJokeRetrofit(): Retrofit? {
+        retrofit = Retrofit.Builder()
+            .baseUrl(DAD_JOKES_URL)
             .addConverterFactory(GsonConverterFactory.create(gson))
             .build()
+        return retrofit
     }
 
-    val apiService: InformationApi = getRetrofit().create(InformationApi::class.java)
+    private fun getChuckFactRetrofit(): Retrofit? {
+        retrofit = Retrofit.Builder()
+            .baseUrl(CHUCK_NORRIS_URL)
+            .addConverterFactory(GsonConverterFactory.create(gson))
+            .build()
+        return retrofit
+    }
+
+    val apiDadJokeService: InformationApi? =
+        getDadJokeRetrofit()?.create(InformationApi::class.java)
+    val apiChuckFactService: InformationApi? =
+        getChuckFactRetrofit()?.create(InformationApi::class.java)
 
 }

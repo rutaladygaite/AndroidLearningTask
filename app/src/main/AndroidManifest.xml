@@ -20,7 +20,7 @@
             android:name=".app.ToDoActivity"
             android:theme="@style/noTransition" />
         <activity
-            android:name=".app.JokesActivity"
+            android:name=".app.ApiActivity"
             android:theme="@style/noTransition" />
         <activity android:name=".app.MainActivity">
             <intent-filter>

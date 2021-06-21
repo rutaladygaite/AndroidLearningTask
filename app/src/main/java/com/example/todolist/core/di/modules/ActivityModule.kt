@@ -14,7 +14,7 @@ abstract class ActivityModule {
     abstract fun contributesMainActivity(): ToDoActivity
 
     @ContributesAndroidInjector
-    abstract fun contributesJokesActivity(): JokesActivity
+    abstract fun contributesJokesActivity(): ApiActivity
 
     @ContributesAndroidInjector
     abstract fun contributesAddAnotherActivity(): AddAnotherActivity

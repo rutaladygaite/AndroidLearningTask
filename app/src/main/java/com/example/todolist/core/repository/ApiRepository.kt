@@ -6,4 +6,6 @@ class ApiRepository(private val apiHelper: ApiHelper) {
 
     suspend fun getDadJoke() = apiHelper.getDadJoke()
 
+    suspend fun getChuckNorrisFact() = apiHelper.getChuckNorrisFact()
+
 }
