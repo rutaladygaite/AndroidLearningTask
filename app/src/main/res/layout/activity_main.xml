@@ -14,7 +14,7 @@
         android:layout_marginBottom="30dp"
         android:backgroundTint="#C06C84"
         android:fontFamily="@font/patrick_hand_sc"
-        android:text="@string/to_do_name"
+        android:text="@string/to_do_title"
         android:textAppearance="@style/TextAppearance.AppCompat.Display1"
         android:textColor="@color/white"
         android:textSize="24sp"

@@ -1,7 +1,7 @@
 <resources>
 
     <!--To Do text-->
-    <string name="to_do_name">To-Do List</string>
+    <string name="to_do_title">To-Do</string>
     <string name="add_to_do">Add another To-Do</string>
     <string name="save_to_do">Save</string>
     <string name="add_text">Add what you have to do:</string>
@@ -20,5 +20,8 @@
     <string name="get_dad_joke">Get a dad joke</string>
     <string name="chuck_fact_name">Chuck Norris facts</string>
     <string name="get_chuck_fact">Get a Chuck Norris fact</string>
+
+    <!--Other -->
+    <string name="application_title">Application</string>
 
 </resources>
