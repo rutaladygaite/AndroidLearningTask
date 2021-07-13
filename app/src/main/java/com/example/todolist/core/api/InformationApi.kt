@@ -11,7 +11,7 @@ interface InformationApi {
     @Headers("Accept: application/json", "User-Agent: Ruta test task https://github.com/rutaladygaite/AndroidLearningTask")
     suspend fun getDadJoke(): DadJokeItem
 
-    @GET("/jokes/random")
+    @GET("https://api.chucknorris.io/jokes/random")
     @Headers("Accept: application/json", "User-Agent: Ruta test task https://github.com/rutaladygaite/AndroidLearningTask")
     suspend fun getChuckNorrisFacts(): ChuckNorrisItem
 

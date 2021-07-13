@@ -1,9 +1,12 @@
 package com.example.todolist.core.api
 
-class ApiHelper(private val informationApi: InformationApi) {
+import javax.inject.Inject
+import javax.inject.Provider
 
-    suspend fun getDadJoke() = informationApi.getDadJoke()
+class ApiHelper @Inject constructor(private val informationApi: Provider<InformationApi>) {
 
-    suspend fun getChuckNorrisFact() = informationApi.getChuckNorrisFacts()
+    suspend fun getDadJoke() = informationApi.get().getDadJoke()
+
+    suspend fun getChuckNorrisFact() = informationApi.get().getChuckNorrisFacts()
 
 }
