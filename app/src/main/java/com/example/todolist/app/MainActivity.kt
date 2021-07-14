@@ -24,14 +24,14 @@ class MainActivity : AppCompatActivity() {
         jokesButton.setOnClickListener {
             startActivity(
                 Intent(this, ApiActivity::class.java)
-                    .putExtra(ApiActivity.DAD_JOKE, "dad_joke")
+                    .putExtra(ApiActivity.BUTTON_SELECTED, "dad_joke")
             )
         }
 
         chuckButton.setOnClickListener {
             startActivity(
                 Intent(this, ApiActivity::class.java)
-                    .putExtra(ApiActivity.CHUCK_FACT, "chuck_fact")
+                    .putExtra(ApiActivity.BUTTON_SELECTED, "chuck_fact")
             )
         }
     }

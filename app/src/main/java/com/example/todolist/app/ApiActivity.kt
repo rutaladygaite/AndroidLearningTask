@@ -39,23 +39,14 @@ class ApiActivity : AppCompatActivity(), HasAndroidInjector {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_api)
 
-        val dadJoke = intent?.extras?.getString(DAD_JOKE)
-        val chuckFact = intent?.extras?.getString(CHUCK_FACT)
-
+        val buttonSelected = intent?.extras?.getString(BUTTON_SELECTED)
         val getApiTextButton = findViewById<Button>(R.id.get_api_text)
         val closeApiButton = findViewById<Button>(R.id.close_api)
 
-        if (chuckFact == CHUCK_INTENT) {
-            get_api_text.setText(R.string.chuck_fact_name)
-        }
+        if (buttonSelected == CHUCK_INTENT) get_api_text.setText(R.string.chuck_fact_name)
 
         getApiTextButton.setOnClickListener {
-            if(dadJoke == DAD_JOKE_INTENT) {
-                apiViewModel.getItem("")
-            }
-            else {
-                apiViewModel.getItem("chuck")
-            }
+            if (buttonSelected == CHUCK_INTENT) setupChuckObservers() else setupDadJokeObservers()
         }
 
         closeApiButton.setOnClickListener {
@@ -75,7 +66,6 @@ class ApiActivity : AppCompatActivity(), HasAndroidInjector {
             }
             Status.ERROR -> {
                 progressBar.visibility = GONE
-                Toast.makeText(this, state.apiError, Toast.LENGTH_LONG).show()
             }
             Status.LOADING -> {
                 progressBar.visibility = VISIBLE
@@ -83,21 +73,39 @@ class ApiActivity : AppCompatActivity(), HasAndroidInjector {
         }
     }
 
-//    Observer for loader icon
+    private fun setupDadJokeObservers() {
+        apiViewModel.getDadJokeError().observe(this, Observer {
+            it?.let { resource ->
+                when (resource.status) {
+                    Status.ERROR -> {
+                        Toast.makeText(this, it.message, Toast.LENGTH_LONG).show()
+                    }
+                    Status.SUCCESS -> {
+                        apiViewModel.getItem("")
+                    }
+                    else -> {
+                    }
+                }
+            }
+        })
+    }
 
-//    private fun setupChuckFactsObservers() {
-//        viewModel.getChuckFactLiveData().observe(this, Observer {
-//            it?.let { resource ->
-//                when (resource.status) {
-//                    Status.LOADING -> {
-//                        progressBar.visibility = VISIBLE
-//
-//                    }
-//                    else -> progressBar.visibility = GONE
-//                }
-//            }
-//        })
-//    }
+    private fun setupChuckObservers() {
+        apiViewModel.getChuckError().observe(this, Observer {
+            it?.let { resource ->
+                when (resource.status) {
+                    Status.ERROR -> {
+                        Toast.makeText(this, it.message, Toast.LENGTH_LONG).show()
+                    }
+                    Status.SUCCESS -> {
+                        apiViewModel.getItem("chuck")
+                    }
+                    else -> {
+                    }
+                }
+            }
+        })
+    }
 
     override fun onDestroy() {
         super.onDestroy()
@@ -107,9 +115,7 @@ class ApiActivity : AppCompatActivity(), HasAndroidInjector {
     override fun androidInjector(): AndroidInjector<Any> = dispatchingAndroidInjector
 
     companion object {
-        const val DAD_JOKE = "false"
-        const val CHUCK_FACT = "false"
-        const val DAD_JOKE_INTENT = "dad_joke"
+        const val BUTTON_SELECTED = "false"
         const val CHUCK_INTENT = "chuck_fact"
     }
 }
