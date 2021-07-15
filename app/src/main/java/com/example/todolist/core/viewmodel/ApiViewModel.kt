@@ -22,22 +22,22 @@ class ApiViewModel @Inject constructor(private val informationApi: Provider<Info
         _state.value = TextState()
     }
 
-    fun getItem(type: String?) {
+    fun getItem(apiType: String?) {
         loader()
-        if (type == "chuck") updateChuckFactText() else updateDadJokeText()
+        if (apiType == "chuck") updateChuckFactText() else updateDadJokeText()
     }
 
     private fun updateDadJokeText() {
         viewModelScope.launch {
-            val getChuckFact = getDadJoke().joke
-            _state.updateState { it.copy(apiText = getChuckFact, apiCallState = Status.SUCCESS) }
+            val getDadJoke = getDadJoke().joke
+            _state.updateState { it.copy(apiText = getDadJoke, apiCallState = Status.SUCCESS) }
         }
     }
 
     private fun updateChuckFactText() {
         viewModelScope.launch {
-            val getDadJoke = getChuckFact().value
-            _state.updateState { it.copy(apiText = getDadJoke, apiCallState = Status.SUCCESS) }
+            val getChuckFact = getChuckFact().value
+            _state.updateState { it.copy(apiText = getChuckFact, apiCallState = Status.SUCCESS) }
         }
     }
 
@@ -53,20 +53,11 @@ class ApiViewModel @Inject constructor(private val informationApi: Provider<Info
         return informationApi.get().getChuckNorrisFacts()
     }
 
-    fun getDadJokeError() = liveData(Dispatchers.IO) {
+    fun getError(apiType: String) = liveData(Dispatchers.IO) {
         emit(Resource.loading(data = null))
         try {
-            emit(Resource.success(data = informationApi.get().getDadJoke()))
-        } catch (exception: Exception) {
-            emit(Resource.error(data = null, message = exception.message ?: "Error Occurred!"))
-            getErrorMessage()
-        }
-    }
-
-    fun getChuckError() = liveData(Dispatchers.IO) {
-        emit(Resource.loading(data = null))
-        try {
-            emit(Resource.success(data = informationApi.get().getChuckNorrisFacts()))
+            if (apiType == "chuck") emit(Resource.success(data = informationApi.get().getChuckNorrisFacts()))
+            else emit(Resource.success(data = informationApi.get().getDadJoke()))
         } catch (exception: Exception) {
             emit(Resource.error(data = null, message = exception.message ?: "Error Occurred!"))
             getErrorMessage()
@@ -82,5 +73,4 @@ class ApiViewModel @Inject constructor(private val informationApi: Provider<Info
     private inline fun MutableLiveData<TextState>.updateState(updateAction: (TextState) -> TextState) {
         value = updateAction(value ?: TextState())
     }
-
 }

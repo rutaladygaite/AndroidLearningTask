@@ -46,7 +46,7 @@ class ApiActivity : AppCompatActivity(), HasAndroidInjector {
         if (buttonSelected == CHUCK_INTENT) get_api_text.setText(R.string.chuck_fact_name)
 
         getApiTextButton.setOnClickListener {
-            if (buttonSelected == CHUCK_INTENT) setupChuckObservers() else setupDadJokeObservers()
+            if (buttonSelected == CHUCK_INTENT) setupObservers("chuck") else setupObservers("")
         }
 
         closeApiButton.setOnClickListener {
@@ -73,34 +73,21 @@ class ApiActivity : AppCompatActivity(), HasAndroidInjector {
         }
     }
 
-    private fun setupDadJokeObservers() {
-        apiViewModel.getDadJokeError().observe(this, Observer {
+    private fun setupObservers(apiType: String) {
+        apiViewModel.getError(apiType).observe(this, Observer {
             it?.let { resource ->
                 when (resource.status) {
                     Status.ERROR -> {
-                        Toast.makeText(this, it.message, Toast.LENGTH_LONG).show()
+                        get_api_text.isClickable = true
+                        Toast.makeText(this, it.message, Toast.LENGTH_SHORT).show()
                     }
                     Status.SUCCESS -> {
-                        apiViewModel.getItem("")
+                        get_api_text.isClickable = true
+                        if (apiType == "chuck") apiViewModel.getItem("chuck") else apiViewModel.getItem("")
                     }
-                    else -> {
-                    }
-                }
-            }
-        })
-    }
-
-    private fun setupChuckObservers() {
-        apiViewModel.getChuckError().observe(this, Observer {
-            it?.let { resource ->
-                when (resource.status) {
-                    Status.ERROR -> {
-                        Toast.makeText(this, it.message, Toast.LENGTH_LONG).show()
-                    }
-                    Status.SUCCESS -> {
-                        apiViewModel.getItem("chuck")
-                    }
-                    else -> {
+                    Status.LOADING -> {
+                        get_api_text.isClickable = false
+                        Timber.d("API LOADING")
                     }
                 }
             }

@@ -45,11 +45,13 @@
         android:textColor="@color/white"
         android:textSize="24sp"
         android:visibility="visible"
+        android:clickable="true"
         app:backgroundTint="#FFFFFF"
         app:layout_constraintBottom_toTopOf="@+id/close_api"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        tools:ignore="UnusedAttribute" />
+        tools:ignore="UnusedAttribute"
+        android:focusable="true" />
 
     <Button
         android:id="@+id/close_api"
