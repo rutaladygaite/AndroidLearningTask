@@ -8,11 +8,9 @@ import retrofit2.http.Headers
 interface InformationApi {
 
     @GET("/")
-   @Headers("Accept: application/json")
     suspend fun getDadJoke(): DadJokeItem
 
     @GET("https://api.chucknorris.io/jokes/random")
-    @Headers("Accept: application/json")
     suspend fun getChuckNorrisFacts(): ChuckNorrisItem
 
 }
