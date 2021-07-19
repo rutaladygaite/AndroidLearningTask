@@ -6,7 +6,6 @@ import com.example.todolist.core.api.HeaderInterceptor
 import com.example.todolist.core.api.InformationApi
 import com.example.todolist.core.di.scopes.BgContext
 import com.example.todolist.core.di.scopes.UIContext
-import com.google.gson.GsonBuilder
 import dagger.Module
 import dagger.Provides
 import kotlinx.coroutines.CoroutineScope
@@ -39,17 +38,13 @@ class AppModule(private val app: Application) {
     fun provideCoroutineScope(@UIContext uiContext: CoroutineContext): CoroutineScope =
         CoroutineScope(uiContext)
 
-    private var gson = GsonBuilder()
-        .setLenient()
-        .create()
-
     private val baseUrl = "https://icanhazdadjoke.com"
 
     @Provides
     fun provideApi(): InformationApi = Retrofit.Builder()
         .client(OkHttpClient.Builder().addInterceptor(HeaderInterceptor()).build())
         .baseUrl(baseUrl)
-        .addConverterFactory(GsonConverterFactory.create(gson))
+        .addConverterFactory(GsonConverterFactory.create())
         .build()
         .create(InformationApi::class.java)
 
