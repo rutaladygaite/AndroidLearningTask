@@ -1,6 +1,7 @@
 package com.example.todolist.core.viewmodel
 
 import androidx.lifecycle.*
+import com.example.todolist.Constants
 import com.example.todolist.core.api.InformationApi
 import com.example.todolist.core.database.ChuckNorrisItem
 import com.example.todolist.core.database.DadJokeItem
@@ -13,7 +14,7 @@ import javax.inject.Inject
 import javax.inject.Provider
 
 class ApiViewModel @Inject constructor(private val informationApi: Provider<InformationApi>) :
-    ViewModel() {
+        ViewModel() {
 
     private val _state = MediatorLiveData<TextState>()
     val state: LiveData<TextState> = _state
@@ -24,7 +25,7 @@ class ApiViewModel @Inject constructor(private val informationApi: Provider<Info
 
     fun getItem(apiType: String?) {
         loader()
-        if (apiType == "chuck") updateChuckFactText() else updateDadJokeText()
+        if (apiType == Constants.CHUCK_FACT) updateChuckFactText() else updateDadJokeText()
     }
 
     private fun updateDadJokeText() {
@@ -41,10 +42,6 @@ class ApiViewModel @Inject constructor(private val informationApi: Provider<Info
         }
     }
 
-    private fun loader() {
-        _state.updateState { it.copy(apiCallState = Status.LOADING) }
-    }
-
     private suspend fun getDadJoke(): DadJokeItem {
         return informationApi.get().getDadJoke()
     }
@@ -53,10 +50,14 @@ class ApiViewModel @Inject constructor(private val informationApi: Provider<Info
         return informationApi.get().getChuckNorrisFacts()
     }
 
+    private fun loader() {
+        _state.updateState { it.copy(apiCallState = Status.LOADING) }
+    }
+
     fun getError(apiType: String) = liveData(Dispatchers.IO) {
         emit(Resource.loading(data = null))
         try {
-            if (apiType == "chuck") emit(Resource.success(data = informationApi.get().getChuckNorrisFacts()))
+            if (apiType == Constants.CHUCK_FACT) emit(Resource.success(data = informationApi.get().getChuckNorrisFacts()))
             else emit(Resource.success(data = informationApi.get().getDadJoke()))
         } catch (exception: Exception) {
             emit(Resource.error(data = null, message = exception.message ?: "Error Occurred!"))

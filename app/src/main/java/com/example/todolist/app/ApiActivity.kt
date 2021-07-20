@@ -10,6 +10,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import com.example.todolist.Constants
 import com.example.todolist.R
 import com.example.todolist.core.database.TextState
 import com.example.todolist.core.di.modules.ViewModelFactory
@@ -39,16 +40,15 @@ class ApiActivity : AppCompatActivity(), HasAndroidInjector {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_api)
 
-        val buttonSelected = intent?.extras?.getString(BUTTON_SELECTED)
         val getApiTextButton = findViewById<Button>(R.id.get_api_text)
         val closeApiButton = findViewById<Button>(R.id.close_api)
 
-        if (buttonSelected == CHUCK_INTENT) get_api_text.setText(R.string.chuck_fact_name)
-
-        getApiTextButton.setOnClickListener {
-            if (buttonSelected == CHUCK_INTENT) setupObservers("chuck") else setupObservers("")
-        }
-
+        val buttonSelected = intent?.extras?.getString(BUTTON_SELECTED) ?: Constants.CHUCK_FACT
+        get_api_text.setText(
+                if (buttonSelected == Constants.CHUCK_FACT) R.string.get_chuck_fact
+                else R.string.get_dad_joke
+        )
+        getApiTextButton.setOnClickListener { setupObservers(buttonSelected) }
         closeApiButton.setOnClickListener {
             super.finish()
         }
@@ -56,9 +56,7 @@ class ApiActivity : AppCompatActivity(), HasAndroidInjector {
     }
 
     private fun bindState(state: TextState) {
-
         Timber.d("API state: $state")
-
         when (state.apiCallState) {
             Status.SUCCESS -> {
                 progressBar.visibility = GONE
@@ -74,7 +72,7 @@ class ApiActivity : AppCompatActivity(), HasAndroidInjector {
     }
 
     private fun setupObservers(apiType: String) {
-        apiViewModel.getError(apiType).observe(this, Observer {
+        apiViewModel.getError(apiType).observe(this, {
             it?.let { resource ->
                 when (resource.status) {
                     Status.ERROR -> {
@@ -83,11 +81,10 @@ class ApiActivity : AppCompatActivity(), HasAndroidInjector {
                     }
                     Status.SUCCESS -> {
                         get_api_text.isClickable = true
-                        if (apiType == "chuck") apiViewModel.getItem("chuck") else apiViewModel.getItem("")
+                        apiViewModel.getItem(apiType)
                     }
                     Status.LOADING -> {
                         get_api_text.isClickable = false
-                        Timber.d("API LOADING")
                     }
                 }
             }
@@ -103,6 +100,5 @@ class ApiActivity : AppCompatActivity(), HasAndroidInjector {
 
     companion object {
         const val BUTTON_SELECTED = "false"
-        const val CHUCK_INTENT = "chuck_fact"
     }
 }
