@@ -81,7 +81,7 @@ class ApiActivity : AppCompatActivity(), HasAndroidInjector {
                     }
                     Status.SUCCESS -> {
                         get_api_text.isClickable = true
-                        apiViewModel.getItem(apiType)
+                        apiViewModel.getItem(it.data!!)
                     }
                     Status.LOADING -> {
                         get_api_text.isClickable = false
