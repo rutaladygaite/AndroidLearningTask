@@ -48,7 +48,9 @@ class ApiActivity : AppCompatActivity(), HasAndroidInjector {
                 if (buttonSelected == Constants.CHUCK_FACT) R.string.get_chuck_fact
                 else R.string.get_dad_joke
         )
-        getApiTextButton.setOnClickListener { setupObservers(buttonSelected) }
+        getApiTextButton.setOnClickListener {
+            setupObservers(buttonSelected)
+        }
         closeApiButton.setOnClickListener {
             super.finish()
         }
@@ -81,7 +83,6 @@ class ApiActivity : AppCompatActivity(), HasAndroidInjector {
                     }
                     Status.SUCCESS -> {
                         get_api_text.isClickable = true
-                        apiViewModel.getItem(it.data!!)
                     }
                     Status.LOADING -> {
                         get_api_text.isClickable = false
