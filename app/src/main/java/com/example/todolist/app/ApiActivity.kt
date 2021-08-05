@@ -45,11 +45,11 @@ class ApiActivity : AppCompatActivity(), HasAndroidInjector {
 
         val buttonSelected = intent?.extras?.getString(BUTTON_SELECTED) ?: Constants.CHUCK_FACT
         get_api_text.setText(
-                if (buttonSelected == Constants.CHUCK_FACT) R.string.get_chuck_fact
-                else R.string.get_dad_joke
+            if (buttonSelected == Constants.CHUCK_FACT) R.string.get_chuck_fact
+            else R.string.get_dad_joke
         )
         getApiTextButton.setOnClickListener {
-            setupObservers(buttonSelected)
+            fetchData(buttonSelected)
         }
         closeApiButton.setOnClickListener {
             super.finish()
@@ -73,8 +73,8 @@ class ApiActivity : AppCompatActivity(), HasAndroidInjector {
         }
     }
 
-    private fun setupObservers(apiType: String) {
-        apiViewModel.getError(apiType).observe(this, {
+    private fun fetchData(apiType: String) {
+        apiViewModel.fetchData(apiType).observe(this, {
             it?.let { resource ->
                 when (resource.status) {
                     Status.ERROR -> {
@@ -100,6 +100,6 @@ class ApiActivity : AppCompatActivity(), HasAndroidInjector {
     override fun androidInjector(): AndroidInjector<Any> = dispatchingAndroidInjector
 
     companion object {
-        const val BUTTON_SELECTED = "false"
+        const val BUTTON_SELECTED = "button_selected"
     }
 }

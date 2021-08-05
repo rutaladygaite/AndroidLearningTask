@@ -35,25 +35,25 @@ class ChangeItemActivity : AppCompatActivity(), Injectable, HasAndroidInjector {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.item_selected)
 
-        //Getting extras from activity
+        // Getting extras from activity
         val textSelected = intent?.extras?.getString(TEXT_SELECTED)
         val idSelected = intent?.extras?.getInt(TEXT_ID_SELECTED)
 
-        //Adding selected text as a title
+        // Adding selected text as a title
         selected_text_edit_field.text = textSelected
 
-        //Adding editable text field with selected text in it
+        // Adding editable text field with selected text in it
         val editText = findViewById<EditText>(R.id.selected_text)
         editText.text = Editable.Factory.getInstance().newEditable(textSelected)
 
-        //Buttons
+        // Buttons
         val editButton = findViewById<Button>(R.id.edit_button)
         val deleteButton = findViewById<Button>(R.id.delete_button)
         val closeButton = findViewById<Button>(R.id.close_button)
         val cancelButton = findViewById<Button>(R.id.cancel_button)
         val applyButton = findViewById<Button>(R.id.apply_button)
 
-        //Buttons functionality
+        // Buttons functionality
         editButton.setOnClickListener {
             selected_text_edit_field.isVisible = false
             selected_text.isVisible = true

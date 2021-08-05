@@ -7,7 +7,7 @@ import retrofit2.http.Headers
 
 interface InformationApi {
 
-    @GET("/")
+    @GET("https://icanhazdadjoke.com")
     suspend fun getDadJoke(): DadJokeItem
 
     @GET("https://api.chucknorris.io/jokes/random")

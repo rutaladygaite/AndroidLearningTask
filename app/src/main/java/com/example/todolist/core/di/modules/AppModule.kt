@@ -38,7 +38,7 @@ class AppModule(private val app: Application) {
     fun provideCoroutineScope(@UIContext uiContext: CoroutineContext): CoroutineScope =
         CoroutineScope(uiContext)
 
-    private val baseUrl = "https://icanhazdadjoke.com"
+    private val baseUrl = "https://localhost"
 
     @Provides
     fun provideApi(): InformationApi = Retrofit.Builder()

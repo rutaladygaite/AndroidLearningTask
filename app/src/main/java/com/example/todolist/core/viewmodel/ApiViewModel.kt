@@ -21,7 +21,7 @@ class ApiViewModel @Inject constructor(private val informationApi: Provider<Info
         _state.value = TextState()
     }
 
-    fun getError(apiType: String) = liveData(Dispatchers.IO) {
+    fun fetchData(apiType: String) = liveData(Dispatchers.IO) {
         emit(Resource.loading(data = null))
         loader()
         try {

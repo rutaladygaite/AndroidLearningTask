@@ -20,8 +20,6 @@ import javax.inject.Inject
 
 class ToDoActivity : AppCompatActivity(), HasAndroidInjector, Injectable {
 
-    private val stateObserver = Observer<ToDoState> { bindState(it) }
-
     @Inject
     lateinit var dispatchingAndroidInjector: DispatchingAndroidInjector<Any>
 
@@ -30,6 +28,8 @@ class ToDoActivity : AppCompatActivity(), HasAndroidInjector, Injectable {
 
     private val toDoViewModel: ToDoViewModel
         get() = ViewModelProvider(this, viewModelFactory).get(ToDoViewModel::class.java)
+
+    private val stateObserver = Observer<ToDoState> { bindState(it) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

@@ -37,7 +37,7 @@ class ToDoAdapter(
 
         holder.itemView.setOnLongClickListener {
             context.startActivity(
-                //Starting a new activity and adding extra values
+                // tarting a new activity and adding extra values
                 Intent(context, ChangeItemActivity::class.java)
                     .putExtra(ChangeItemActivity.TEXT_SELECTED, textSelected)
                     .putExtra(ChangeItemActivity.TEXT_ID_SELECTED, idSelected)
